@@ -47,7 +47,10 @@ class trans_api:
             "Referer": "http://fanyi.youdao.com/",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
         }
-        res = requests.post(url=url, data=data, headers=headers).json()
-        result = self.word + "的译文：" + res['translateResult'][0][0]['tgt'] + "\n" + "用法：" + res['smartResult']['entries'][1]
-        return result
-
+        try:
+            res = requests.post(url=url, data=data, headers=headers).json()
+            result = self.word + "的译文：" + res['translateResult'][0][0]['tgt'] + "\n" + "用法：" + \
+                     res['smartResult']['entries'][1]
+            return result
+        except:
+            return 0
